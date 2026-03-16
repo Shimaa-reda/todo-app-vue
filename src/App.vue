@@ -75,12 +75,14 @@ const appClass= computed(()=>{
   /> -->
   <div :class="appClass">
       <nav class="navbar px-3" :class="appThemeStore.isDarkMode ? 'navbar-light bg-light-nav' : 'navbar-dark bg-dark-nav '">
-    <RouterLink class="navbar-brand text-white " to="/">Todos</RouterLink>
+    <RouterLink class="navbar-brand  " to="/">Todos</RouterLink>
 
     <div class="gap-3 d-flex">
       <RouterLink to="/" class="">Home</RouterLink>
       <RouterLink to="/about" class="">About</RouterLink>
       <RouterLink to="/profile">Profile</RouterLink>
+      <RouterLink to="/recipes">Recipes (Fetch API)</RouterLink>
+      <RouterLink to="/recipesAxios">Recipes (Axios)</RouterLink>
 
     </div>
     <button class="btn btn-outline-secondary" @click="appThemeStore.toggleTheme">
@@ -118,11 +120,20 @@ a{
   /* color: white; */
   text-decoration: none;
 }
-.bg-dark-nav a.router-link-exact-active,
+.navbar a {
+  color: black;
+  text-decoration: none;
+}
+
+.navbar a.router-link-exact-active {
+  color: blue;
+  font-weight: bold;
+}
+/* .bg-dark-nav a.router-link-exact-active,
 .bg-light-nav a.router-link-exact-active {
   color: blue !important;
   font-weight: bold;
-}
+} */
 
 .bg-dark-nav,.bg-dark-nav a {
   color: #ffffff;

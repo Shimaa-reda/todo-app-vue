@@ -24,7 +24,20 @@ const router = createRouter({
     },
      { path: '/profile',
        name: 'profile', 
-       component: () => import('../views/ProfileView.vue') }
+       component: () => import('../views/ProfileView.vue') 
+      },
+      { path: '/recipes',
+       name: 'recipes', 
+       component: () => import('../views/RecipesView.vue') 
+      },
+      { path: '/recipesAxios',
+       name: 'recipes-axios', 
+       component: () => import('../views/RecipesAxiosView.vue') 
+      },
+      { path: '/recipes/:id',
+       name: 'recipeDetails', 
+       component: () => import('../views/RecipeDetailsView.vue') 
+      },
   ],
 })
 
