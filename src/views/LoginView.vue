@@ -86,6 +86,7 @@ const handleSubmit = () => {
 
   <form @submit.prevent="handleSubmit" novalidate>
     <div class="mb-3">
+        
         <label for="name">Name</label>
         <input 
         type="text"
