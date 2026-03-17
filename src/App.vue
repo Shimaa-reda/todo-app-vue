@@ -89,13 +89,22 @@ const appClass= computed(()=>{
         Toggle Theme ({{ appThemeStore.isDarkMode ? 'Light' : 'Dark' }})
     </button>
     <span v-if="userStore.isLoggedIn">Welcome, {{ userStore.user?.name }}!</span>
-        <button
+        <!-- <button
           v-if="!userStore.isLoggedIn"
           class="btn btn-sm btn-primary"
-          @click="userStore.login('Shimaa')"
+          
+          to="/login"
         >
           Login
-        </button>
+        </button> -->
+        <RouterLink 
+         v-if="!userStore.isLoggedIn"
+        class="btn btn-sm btn-primary"
+        to="/login"
+        
+        >
+          Login
+        </RouterLink>
         <button
           v-else
           class="btn btn-sm btn-outline-danger"
