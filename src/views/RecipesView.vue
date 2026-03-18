@@ -32,7 +32,7 @@ onMounted(()=>{
 
 
 <template>
-    <h1 class="text-center"> API Integration with Fetch</h1>
+    <h1 class="text-center" v-once> API Integration with Fetch</h1>
       <div class="container py-4">
     <h1 class="mb-3">Recipes (Fetch)</h1>
 

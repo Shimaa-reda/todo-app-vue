@@ -6,7 +6,7 @@ const userStore=useUserStore()
 </script>
 <template>
     <div class="container mt-4">
-    <h1>Profile</h1>
+    <h1 v-once>Profile</h1>
 
     <div v-if="userStore.isLoggedIn">
       <p>Name: {{ userStore.user.name }}</p>

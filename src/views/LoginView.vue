@@ -14,6 +14,7 @@ const errors=ref({
 })
 const userStore=useUserStore()
 const Router=useRouter()
+
 const isSubmitting=ref(false)
 // manually validate form inputs
 const validateForm=()=>{
@@ -48,29 +49,39 @@ const validateForm=()=>{
   return isValid
 }
 
+
 const handleSubmit = () => {
-//   console.log('submit clicked')
-
-//   const ok = validateForm()
-//   console.log('validate result:', ok)
-
-
-  if (!validateForm) {
-    return
-  }
+  if (!validateForm()) return
 
   isSubmitting.value = true
+
   setTimeout(() => {
-    // console.log('Logged in with:', {
-    //   name: name.value,
-    //   email: email.value,
-    //   password: password.value
-    // })
-    userStore.login(name.value)
+    // 1) get registered user from localStorage
+    const saved = localStorage.getItem('registeredUser')
+    if (!saved) {
+      // if no registered user found → show error
+      errors.value.form = 'No registered user found. Please register first.'
+      isSubmitting.value = false
+      return
+    }
+
+    const registeredUser = JSON.parse(saved)
+
+    // 2) check email/password
+    if (email.value !== registeredUser.email ||password.value !== registeredUser.password)
+     {
+      errors.value.form = 'Invalid email or password'
+      isSubmitting.value = false
+      return
+    }
+
+    // 3) login success
+    userStore.login(registeredUser.name)
     isSubmitting.value = false
-    router.push('/') // redirect to home after login
+    router.push('/')
   }, 600)
 }
+
 
 
 </script>
@@ -79,14 +90,15 @@ const handleSubmit = () => {
 <template>
   <div class="container py-5" style="max-width: 500px">
     <h1 class="mb-4 text-center">Login</h1>
+    <div v-if="errors.form" class="alert alert-danger">
+  {{ errors.form }}
+</div>
 
-    <!-- <div v-if="errors.form" class="alert alert-danger">
-      {{ errors.form }}
-    </div> -->
+
 
   <form @submit.prevent="handleSubmit" novalidate>
     <div class="mb-3">
-        
+
         <label for="name">Name</label>
         <input 
         type="text"
@@ -144,6 +156,11 @@ const handleSubmit = () => {
          <span v-else>Login</span>
         
     </button>
+    <p class="mt-3 text-center">
+  Don't have an account?
+  <RouterLink to="/register">Register</RouterLink>
+</p>
+
 
   </form>
   </div>

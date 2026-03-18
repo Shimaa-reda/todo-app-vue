@@ -74,45 +74,72 @@ const appClass= computed(()=>{
   @change-age="ChangeAge"
   /> -->
   <div :class="appClass">
-      <nav class="navbar px-3" :class="appThemeStore.isDarkMode ? 'navbar-light bg-light-nav' : 'navbar-dark bg-dark-nav '">
-    <RouterLink class="navbar-brand  " to="/">Todos</RouterLink>
+      <nav
+  class="navbar navbar-expand-lg px-3"
+  :class="appThemeStore.isDarkMode ? 'navbar-dark bg-dark-nav' : 'navbar-light bg-light-nav'"
+>
+  <!-- Logo -->
+  <RouterLink class="navbar-brand" to="/">Todos</RouterLink>
 
-    <div class="gap-3 d-flex">
-      <RouterLink to="/" class="">Home</RouterLink>
-      <RouterLink to="/about" class="">About</RouterLink>
-      <RouterLink to="/profile">Profile</RouterLink>
-      <RouterLink to="/recipes">Recipes (Fetch API)</RouterLink>
-      <RouterLink to="/recipesAxios">Recipes (Axios)</RouterLink>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarContent"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
+  <!-- Collapsible Content -->
+  <div class="collapse navbar-collapse" id="navbarContent">
+    <!-- Links -->
+    <div class="navbar-nav me-auto gap-lg-3">
+      <RouterLink to="/" class="nav-link">Home</RouterLink>
+      <RouterLink to="/about" class="nav-link">About</RouterLink>
+      <RouterLink to="/profile" class="nav-link">Profile</RouterLink>
+      <RouterLink to="/recipes" class="nav-link">Recipes</RouterLink>
+      <RouterLink to="/recipesAxios" class="nav-link">Axios</RouterLink>
     </div>
-    <button class="btn btn-outline-secondary" @click="appThemeStore.toggleTheme">
-        Toggle Theme ({{ appThemeStore.isDarkMode ? 'Light' : 'Dark' }})
-    </button>
-    <span v-if="userStore.isLoggedIn">Welcome, {{ userStore.user?.name }}!</span>
-        <!-- <button
-          v-if="!userStore.isLoggedIn"
-          class="btn btn-sm btn-primary"
-          
-          to="/login"
-        >
-          Login
-        </button> -->
-        <RouterLink 
-         v-if="!userStore.isLoggedIn"
+
+    <!-- Right side -->
+    <div class="d-flex align-items-center gap-2">
+      <button
+        class="btn btn-outline-secondary"
+        @click="appThemeStore.toggleTheme"
+      >
+        {{ appThemeStore.isDarkMode ? 'Light' : 'Dark' }}
+      </button>
+
+      <span v-if="userStore.isLoggedIn">
+        Welcome, {{ userStore.user?.name }}!
+      </span>
+
+      <RouterLink
+        v-if="!userStore.isLoggedIn"
         class="btn btn-sm btn-primary"
         to="/login"
-        
-        >
-          Login
-        </RouterLink>
-        <button
-          v-else
-          class="btn btn-sm btn-outline-danger"
-          @click="userStore.logout"
-        >
-          Logout
-        </button>
-  </nav>
+      >
+        Login
+      </RouterLink>
+
+      <RouterLink
+        v-if="!userStore.isLoggedIn"
+        class="btn btn-sm btn-success"
+        to="/register"
+      >
+        Register
+      </RouterLink>
+
+      <button
+        v-else
+        class="btn btn-sm btn-outline-danger"
+        @click="userStore.logout"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+</nav>
 
   <main class="py-4">
     <RouterView />
@@ -150,6 +177,8 @@ a{
 
 .bg-light-nav  {
   color: #000000;
+  
+
 }
 
 .app-light {
@@ -167,7 +196,7 @@ a{
 
 
 .bg-light-nav {
-  background-color: #f1f1f1;
+  background-color: #d1d1d1;
 }
 .app {
   min-height: 100vh;

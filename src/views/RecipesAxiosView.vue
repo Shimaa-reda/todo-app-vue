@@ -35,7 +35,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <h1 class="text-center">API Integration with Axios</h1>
+  <h1 class="text-center" v-once>API Integration with Axios</h1>
   <div class="container py-4">
     <form class="row g-2 mb-4" @submit.prevent="fetchRecipes">
       <div class="col-md-10 col-sm-12">
